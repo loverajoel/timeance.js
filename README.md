@@ -1,8 +1,8 @@
 # Timeance.js
 
-**TimeanceJS** Track load times
+Abstract library for track loadtimes
 
-**Note:** This is development mode.
+**Note:** This is in development mode.
 
 
 # Example
