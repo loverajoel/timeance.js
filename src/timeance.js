@@ -1,6 +1,6 @@
 /**
  * Timeance.js 1.0.0
- * http://loverajoel/reveal-js
+ * https://github.com/loverajoel/timeance.js
  * MIT licensed
  */
 
