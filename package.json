@@ -1,0 +1,16 @@
+{
+  "name": "Timeance.js",
+  "version": "1.0.0",
+  "description": "Abstract library for track loadtimes.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loverajoel/timeance.js"
+  },
+  "dependencies": {
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-load-plugins": "^0.8.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-uglify": "^1.0.2"
+  }
+}
