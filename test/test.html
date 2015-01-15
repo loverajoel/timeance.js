@@ -12,7 +12,7 @@
 
 <script>
 
-    Timeance.event({customer_id: 1})
+    Timeance.event({name: 'Jhon Galt'})
 
     setTimeout(function() {
         Timeance.event('lister-one');
@@ -20,15 +20,10 @@
 
     setTimeout(function() {
         Timeance.event('lister-two');
-        Timeance.event({instance: "asdfasdfasfasdfasdf"})
+        Timeance.event({city: "NY"})
     }, 100);
 
     // Final event send
-    window.onload =function(){
-        Timeance.end(function(response) {
-            console.log(response);
-        });
-    };
 
     Timeance.end(function(response) {
         console.log(response);
