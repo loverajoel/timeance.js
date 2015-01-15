@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+
+<img src="http://static3.businessinsider.com/image/51c60126ecad04d776000008/maria-sharapova-blasts-serena-williams-criticizes-her-love-life.jpg" width="100" height="100">
+
+<!-- Timeance implementation -->
+
+<script type="text/javascript" src="../src/timeance.js"></script>
+
+<script>
+
+    Timeance.event({customer_id: 1})
+
+    setTimeout(function() {
+        Timeance.event('lister-one');
+    }, 10);
+
+    setTimeout(function() {
+        Timeance.event('lister-two');
+        Timeance.event({instance: "asdfasdfasfasdfasdf"})
+    }, 100);
+
+    // Final event send
+    window.onload =function(){
+        Timeance.end(function(response) {
+            console.log(response);
+        });
+    };
+
+    Timeance.end(function(response) {
+        console.log(response);
+    }, true);
+
+</script>
+
+</body>
+</html>
