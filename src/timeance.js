@@ -1,24 +1,19 @@
-/**
- * Timeance.js 1.0.0
- * https://github.com/loverajoel/timeance.js
- * MIT licensed
- */
+class Timeance {
 
-var Timeance = (function(window) {
-    'use strict';
-
-    var performance = (typeof window.performance !== 'undefined') ? window.performance : undefined,
-        customEvents = [];
-
+    constructor() {
+        this.performance = (typeof window.performance !== 'undefined') ? window.performance : undefined;
+        this.customEvents = [];
+    }
+    
     /*
      * Function that return the mapped data, and append to
      * it, default info like, resources and timing.
      */
-    var _getResponse = function() {
+    get response() {
         return {
-            resources: performance.getEntries(),
-            timing: performance.timing,
-            customEvents: customEvents
+            resources: this.performance.getEntries(),
+            timing: this.performance.timing,
+            customEvents: this.customEvents
         };
     };
 
@@ -27,10 +22,10 @@ var Timeance = (function(window) {
      * Push the event to the _customerEvents var.
      * @param info {string|object}
      */
-    var _event = function(info) {
-        var data = {
+    _event(info) {
+        let data = {
             event: info,
-            time: performance.now()
+            time: this.performance.now()
         };
         customEvents.push(data);
     };
@@ -41,13 +36,13 @@ var Timeance = (function(window) {
      * @param wait {bool} *optional if is true, the response
      * will wait for the window.onload event fire
      */
-    var _endResponse = function(callback, wait) {
+    _endResponse(callback, wait) {
         if (wait) {
             window.onload = function() {
-                callback(_getResponse());
+                callback(this.response());
             };
         } else {
-            callback(_getResponse());
+            callback(this.response());
         }
     };
 
@@ -55,10 +50,9 @@ var Timeance = (function(window) {
      * Public events
      */
     var methods = {
-        event: performance ? _event : function(){},
-        end: performance ? _endResponse : function(){}
+        event: this.performance ? this._event : function(){},
+        end: this.performance ? this._endResponse : function(){}
     };
+}
 
-    return methods;
-
-})(this);
+export {Timeance};

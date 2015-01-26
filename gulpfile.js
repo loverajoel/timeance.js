@@ -1,13 +1,69 @@
-var gulp    = require("gulp"),
-    plugins = require("gulp-load-plugins")();
+var gulp = require('gulp');
+var fs = require('fs');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var to5Browserify = require('6to5-browserify');
+var rimraf = require('rimraf');
+var source = require('vinyl-source-stream');
+var _ = require('lodash');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 
-gulp.task("scripts", function () {
-    gulp
-        .src("src/timeance.js")
-        .pipe(gulp.dest("dist"))
-        .pipe(plugins.uglify())
-        .pipe(plugins.rename({ suffix: ".min" }))
-        .pipe(gulp.dest("dist"));
+var config = {
+  entryFile: './src/timeance.js',
+  outputDir: './dist/',
+  outputFile: 'timeance.js'
+};
+
+// clean the output directory
+gulp.task('clean', function(cb){
+    rimraf(config.outputDir, cb);
 });
 
-gulp.task("default", ["scripts"]);
+var bundler;
+function getBundler() {
+  if (!bundler) {
+    bundler = watchify(browserify(config.entryFile, _.extend({ debug: true }, watchify.args)));
+  }
+  return bundler;
+};
+
+function bundle() {
+  return getBundler()
+    .transform(to5Browserify)
+    .bundle()
+    .on('error', function(err) { console.log('Error: ' + err.message); })
+    .pipe(source(config.outputFile))
+    .pipe(gulp.dest(config.outputDir))
+    .pipe(reload({ stream: true }));
+}
+
+gulp.task('build-persistent', ['clean'], function() {
+  return bundle();
+});
+
+gulp.task('build', ['build-persistent'], function() {
+  process.exit(0);
+});
+
+gulp.task('watch', ['build-persistent'], function() {
+
+  browserSync({
+    server: {
+      baseDir: './'
+    }
+  });
+
+  getBundler().on('update', function() {
+    gulp.start('build-persistent')
+  });
+});
+
+// WEB SERVER
+gulp.task('serve', function () {
+  browserSync({
+    server: {
+      baseDir: './'
+    }
+  });
+});
