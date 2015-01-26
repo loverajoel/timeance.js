@@ -36,7 +36,7 @@ class Timeance {
      * @param wait {bool} *optional if is true, the response
      * will wait for the window.onload event fire
      */
-    _endResponse(callback, wait) {
+    _endResponse(callback, wait) {es6
         if (wait) {
             window.onload = function() {
                 callback(this.response());
@@ -49,7 +49,7 @@ class Timeance {
     /*
      * Public events
      */
-    var methods = {
+    let methods = {
         event: this.performance ? this._event : function(){},
         end: this.performance ? this._endResponse : function(){}
     };
