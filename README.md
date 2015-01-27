@@ -4,7 +4,7 @@ Abstract library for track loadtimes
 
 **Note:** This is in development mode.
 
-[ES6 version!](/tree/es6)
+[ES6 version!](https://github.com/loverajoel/timeance.js/tree/es6)
 
 # Example
 
