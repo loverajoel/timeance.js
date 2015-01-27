@@ -1,58 +1,72 @@
+"use strict";
+
 class Timeance {
 
-    constructor() {
-        this.performance = (typeof window.performance !== 'undefined') ? window.performance : undefined;
-        this.customEvents = [];
-    }
-    
     /*
-     * Function that return the mapped data, and append to
-     * it, default info like, resources and timing.
+     * Init the vars
      */
-    get response() {
+    constructor() {
+        this._performance = (typeof window.performance !== 'undefined') ? window.performance : undefined;
+        this._customEvents = new Set();
+    }
+
+    /*
+     * Private method
+     * This method return the mapped data
+     */
+    _response() {
         return {
-            resources: this.performance.getEntries(),
-            timing: this.performance.timing,
-            customEvents: this.customEvents
+            resources: this._performance.getEntries(),
+            timing: this._performance.timing,
+            customEvents: this._customEvents.values()
         };
     };
 
     /*
-     * Function that allow inyect custom events.
-     * Push the event to the _customerEvents var.
+     * Private method
+     * This method allow you add custom events
      * @param info {string|object}
      */
     _event(info) {
         let data = {
             event: info,
-            time: this.performance.now()
+            time: this._performance.now()
         };
-        customEvents.push(data);
+        this._customEvents.add(data);
     };
 
     /*
-     * Function that finish the record info.
+     * Private method
+     * Method that finish the record info.
      * @param callback {function}
      * @param wait {bool} *optional if is true, the response
      * will wait for the window.onload event fire
      */
-    _endResponse(callback, wait) {es6
+    _end(callback, wait) {
+        let self = this;
         if (wait) {
             window.onload = function() {
-                callback(this.response());
-            };
+                return callback(self._response());
+            }
         } else {
-            callback(this.response());
+            return callback(self._response());
         }
-    };
+    }
 
     /*
-     * Public events
+     * Public method
+     * @param callback {function}
+     * @param wait {bool}
      */
-    let methods = {
-        event: this.performance ? this._event : function(){},
-        end: this.performance ? this._endResponse : function(){}
-    };
-}
+    event(info) {
+        return this._performance ? this._event(info) : function(){}
+    }
 
-export {Timeance};
+    /*
+     * Public method
+     * @param info {string|object}
+     */
+    end(callback, wait) {
+        return this._performance ? this._end(callback, wait) : function(){}
+    }
+}

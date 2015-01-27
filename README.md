@@ -1,6 +1,6 @@
-# Timeance.js
+# Timeance.js ES6
 
-Abstract library for track loadtimes
+Abstract library for track loadtimes implemented in ES6
 
 **Note:** This is in development mode.
 
@@ -12,12 +12,14 @@ Abstract library for track loadtimes
 ```
 
 ```javascript
+  
+  let timeance = new Timeance();
 
-  Timeance.event({name: 'Jhon Galt'})
+  timeance.event({name: 'Jhon Galt'})
 
-  Timeance.event('lister-one');
+  timeance.event('lister-one');
 
-  Timeance.end(function(response) {
+  timeance.end(function(response) {
         // response {}
     }, true);
   

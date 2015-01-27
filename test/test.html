@@ -11,21 +11,22 @@
 <script type="text/javascript" src="../src/timeance.js"></script>
 
 <script>
+    "use strict";
 
-    Timeance.event({name: 'Jhon Galt'})
+    let timeance = new Timeance();
 
     setTimeout(function() {
-        Timeance.event('lister-one');
+        timeance.event('lister-one');
     }, 10);
 
     setTimeout(function() {
-        Timeance.event('lister-two');
-        Timeance.event({city: "NY"})
+        timeance.event('lister-two');
+        timeance.event({city: "NY"})
     }, 100);
 
     // Final event send
 
-    Timeance.end(function(response) {
+    timeance.end(function(response) {
         console.log(response);
     }, true);
 
