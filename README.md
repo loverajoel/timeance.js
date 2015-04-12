@@ -6,6 +6,10 @@ Abstract library for track loadtimes
 
 [ES6 version!](https://github.com/loverajoel/timeance.js/tree/es6)
 
+# Install
+
+```bower install timeance```
+
 # Example
 
 ```html
