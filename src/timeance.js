@@ -4,7 +4,7 @@
  * MIT licensed
  */
 
-;(function(root, factory){
+(function(root, factory){
     if(typeof define === 'function' && define.amd){
         define([],factory);
     }else{
@@ -13,8 +13,7 @@
 })(this, (function(){
 
 var Timeance = (function(window) {
-        'use strict';
-
+    
         var performance = (typeof window.performance !== 'undefined') ? window.performance : undefined,
             customEvents = [];
 
@@ -72,4 +71,4 @@ var Timeance = (function(window) {
     })(this);
     return Timeance;
 
-}));
+})());
