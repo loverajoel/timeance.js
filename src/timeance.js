@@ -1,74 +1,98 @@
+'use strict';
 /**
- * Timeance.js 1.0.0
+ * Timeance.js
  * https://github.com/loverajoel/timeance.js
  * MIT licensed
  */
 
-(function(root, factory){
-    if(typeof define === 'function' && define.amd){
-        define([],factory);
-    }else{
-        root.Timeance = factory;
-    }
-})(this, (function(){
-
 var Timeance = (function(window) {
-    
-        var performance = (typeof window.performance !== 'undefined') ? window.performance : undefined,
-            customEvents = [];
 
-        /*
-         * Function that return the mapped data, and append to
-         * it, default info like, resources and timing.
-         */
-        var _getResponse = function() {
-            return {
-                resources: performance.getEntries(),
-                timing: performance.timing,
-                customEvents: customEvents
-            };
-        };
+  var performance = (typeof window.performance !== 'undefined') ? window.performance : undefined;
+  var _customEvents = [];
 
-        /*
-         * Function that allow inyect custom events.
-         * Push the event to the _customerEvents var.
-         * @param info {string|object}
-         */
-        var _event = function(info) {
-            var data = {
-                event: info,
-                time: performance.now()
-            };
-            customEvents.push(data);
-        };
+  /**
+   * Function that return the mapped data, and append to
+   * it, default info like, resources and timing.
+   */
+  var _getResponse = function() {
+      return {
+          resources: performance.getEntries(),
+          timing: performance.timing,
+          customEvents: _customEvents
+      };
+  };
 
-        /*
-         * Function that finish the record info.
-         * @param callback {function}
-         * @param wait {bool} *optional if is true, the response
-         * will wait for the window.onload event fire
-         */
-        var _endResponse = function(callback, wait) {
-            if (wait) {
-                window.onload = function() {
-                    callback(_getResponse());
-                };
-            } else {
-                callback(_getResponse());
-            }
-        };
+  /*
+   * Allow inject custom events, all events are pushed into an array and returned when
+   * the end() public method is invoqued.
+   * 
+   * @private
+   * @param {Object|String} info Id of event.
+   * @return {Void}
+   */
+  var _event = function(info) {
+      var data = {
+          event: info,
+          time: performance.now()
+      };
+      _customEvents.push(data);
+  };
 
-        /*
-         * Public events
-         */
-        var methods = {
-            event: performance ? _event : function(){},
-            end: performance ? _endResponse : function(){}
-        };
+  /*
+   * Finish the current record and return the data.
+   * If a optional param `wait` exist, the end response will fire when the `window.load` was fired.
+   *
+   * @example
+   * ```
+   * Timeance.end();
+   * ```
+   * 
+   * @private
+   * @param {Function} callback Function to invoke when the response finished.
+   * @param {Boolean} wait
+   * @return {Function}
+   */
+  var _endResponse = function(callback, wait) {
+    if (wait) {
+      window.onload = function() {
+        callback(_getResponse());
+      };
+    } else {
+      callback(_getResponse());
+    }
+  };
 
-        return methods;
+  /*
+   * Allow inject custom events, all events are pushed into an array and returned when
+   * the end() public method is invoqued.
+   *
+   * @example
+   * ```
+   * var myEvent = Timeance.track('myEvent');
+   * myEvent(function(event, time) {
+   * 
+   * });
+   * ```
+   * 
+   * @private
+   * @param {Object|String} info Id of event.
+   * @return {Void}
+   */
+  var _track = function(name) {
+    var _name = name;
+    var _start = Date.now();
+    return function(callback) {
+      callback(_name, Date.now() - _start);
+      return Date.now() - _start;
+    };
+  };
 
-    })(this);
-    return Timeance;
-
-})());
+  /*
+   * Public events
+   */
+  return {
+      event: performance ? _event : function(){},
+      track: performance ? _track : function(){},
+      end: performance ? _endResponse : function(){}
+  };
+})(this);

@@ -14,13 +14,18 @@
 
     Timeance.event({name: 'Jhon Galt'})
 
+    var timeTrack = Timeance.track('test_track');
+
     setTimeout(function() {
         Timeance.event('lister-one');
+        timeTrack(function(event, time) {
+            console.log(event, time);
+        });
     }, 10);
 
     setTimeout(function() {
         Timeance.event('lister-two');
-        Timeance.event({city: "NY"})
+        Timeance.event({city: "NY"});
     }, 100);
 
     // Final event send
