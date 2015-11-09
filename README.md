@@ -21,9 +21,10 @@ Timeance provide a easy API.
 
 ### measure(event)
 Measure custom events in time flow execution.
+
 Example:
 
-```
+```js
 var timeTrack = Timeance.measure('test_track');
 setTimeout(function() {
   timeTrack(function(event, time) {
@@ -35,7 +36,7 @@ setTimeout(function() {
 
 Example:
 
-```
+```js
 var timeTrack = Timeance.measure('get_user_info');
 fetch('user/me', function() {
   ...
@@ -45,7 +46,7 @@ fetch('user/me', function() {
 
 ### event(info)
 Track a simple event in your execution flow. This will be return with final data.
-```
+```js
 Timeance.event('lister-two');
 Timeance.event({id: 'lister-two'});
 ```
@@ -53,7 +54,7 @@ Timeance.event({id: 'lister-two'});
 ### end(callback, wait)
 End the currend record of information and obtain de data.
 If `wait` is true, the end method will wait to `window.load` will fired.
-```
+```js
 Timeance.end(function(response) {
   console.log(response);
 });
