@@ -2,6 +2,8 @@
 
 > Abstract library for track loadtimes < 500 bytes
 
+[![npm version](https://badge.fury.io/js/timeance.svg)](http://badge.fury.io/js/timeance)
+
 # Features
 
 - Access to `window.performance` data
@@ -15,7 +17,7 @@
 
 # Examples
 
-[Simlple](http://requirebin.com/?gist=c08cff9cc1a0c49a8506)
+[Simple](http://requirebin.com/?gist=c08cff9cc1a0c49a8506)
 
 # Usage
 
