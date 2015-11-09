@@ -11,24 +11,21 @@ var Timeance = (function(window) {
   var _customEvents = [];
 
   /**
-   * Function that return the mapped data, and append to
-   * it, default info like, resources and timing.
+   * Build the final response and atach to ir the custom events
    */
   var _getResponse = function() {
       return {
-          resources: performance.getEntries(),
-          timing: performance.timing,
+          performance: performance,
           customEvents: _customEvents
       };
   };
 
   /*
-   * Allow inject custom events, all events are pushed into an array and returned when
-   * the end() public method is invoqued.
+   * Atach custom events to an array that will be returned when end() is called.
    * 
    * @private
    * @param {Object|String} info Id of event.
-   * @return {Void}
+   * @return {Object} Event recently tracked
    */
   var _event = function(info) {
       var data = {
@@ -36,53 +33,55 @@ var Timeance = (function(window) {
           time: performance.now()
       };
       _customEvents.push(data);
+      return data;
   };
 
   /*
    * Finish the current record and return the data.
    * If a optional param `wait` exist, the end response will fire when the `window.load` was fired.
-   *
-   * @example
-   * ```
-   * Timeance.end();
-   * ```
    * 
    * @private
    * @param {Function} callback Function to invoke when the response finished.
-   * @param {Boolean} wait
+   * @param {Boolean} [wait]
    * @return {Function}
    */
   var _endResponse = function(callback, wait) {
     if (wait) {
       window.onload = function() {
-        callback(_getResponse());
+        return callback(_getResponse());
       };
     } else {
-      callback(_getResponse());
+      return callback(_getResponse());
     }
   };
 
   /*
-   * Allow inject custom events, all events are pushed into an array and returned when
-   * the end() public method is invoqued.
+   * This method allow you measure events in execution time flow.
+   * When you call for first time, save the current time and return a function, that when it's 
+   * resolved calcule the difference between start and end Data.now(), and return the result in
+   * miliseconds.
    *
    * @example
    * ```
-   * var myEvent = Timeance.track('myEvent');
-   * myEvent(function(event, time) {
+   * var myEvent = Timeance.measure('myEvent');
+   * setTimeout(function() {
+   *  myEvent(function(event, time) {
+   *    //event = 'myEvent'
+   *    //time = 1500
+   *  }, 1500);
+   * })
    * 
-   * });
    * ```
    * 
    * @private
    * @param {Object|String} info Id of event.
-   * @return {Void}
+   * @return {Function}
    */
-  var _track = function(name) {
-    var _name = name;
+  var _measure = function(info) {
+    var _info = info;
     var _start = Date.now();
     return function(callback) {
-      callback(_name, Date.now() - _start);
+      callback(_info, Date.now() - _start);
       return Date.now() - _start;
     };
   };
@@ -92,7 +91,7 @@ var Timeance = (function(window) {
    */
   return {
       event: performance ? _event : function(){},
-      track: performance ? _track : function(){},
+      measure: performance ? _measure : function(){},
       end: performance ? _endResponse : function(){}
   };
 })(this);
