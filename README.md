@@ -1,6 +1,6 @@
 # Timeance.js
 
-> Abstract library for track loadtimes
+> Abstract library for track loadtimes < 500 bytes
 
 # Features
 
@@ -11,9 +11,11 @@
 
 # Install
 
-```bower install timeance```
-
 ```npm install timeance```
+
+# Examples
+
+[Simlple](http://requirebin.com/?gist=c08cff9cc1a0c49a8506)
 
 # Usage
 
