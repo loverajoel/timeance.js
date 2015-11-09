@@ -1,6 +1,6 @@
 {
-  "name": "Timeance.js",
-  "version": "1.0.0",
+  "name": "timeance",
+  "version": "1.0.2",
   "description": "Abstract library for track loadtimes.",
   "repository": {
     "type": "git",
@@ -12,5 +12,12 @@
     "gulp-load-plugins": "^0.8.0",
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^1.0.2"
-  }
+  },
+  "scripts": {
+    "build": "gulp build",
+    "prepublish": "npm run build"
+  },
+  "author": "loverajoel",
+  "license": "MIT",
+  "main": "dist/timeance.js"
 }
