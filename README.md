@@ -1,8 +1,8 @@
 # Timeance.js
 
-> Abstract library for track loadtimes < 500 bytes
-
 [![npm version](https://badge.fury.io/js/timeance.svg)](http://badge.fury.io/js/timeance)
+
+> Abstract library for track loadtimes < 500 bytes
 
 # Features
 
