@@ -20,6 +20,7 @@
      */
     var _getResponse = function() {
       return {
+        resources: performance.getEntries(),
         performance: performance,
         customEvents: _customEvents
       };
