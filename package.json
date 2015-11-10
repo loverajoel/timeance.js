@@ -7,14 +7,10 @@
     "url": "https://github.com/loverajoel/timeance.js"
   },
   "dependencies": {
-    "gulp": "^3.8.10",
-    "gulp-autoprefixer": "^2.0.0",
-    "gulp-load-plugins": "^0.8.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-uglify": "^1.0.2"
+    "uglifyjs": "2.4.10"
   },
   "scripts": {
-    "build": "gulp build",
+    "build": "mkdir -p dist; cp src/timeance.js dist/timeance.js; uglifyjs -c -m -o dist/timeance.min.js -- dist/timeance.js",
     "prepublish": "npm run build"
   },
   "author": "loverajoel",
