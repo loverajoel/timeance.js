@@ -24,7 +24,10 @@
 Timeance provide a easy API.
 
 ### measure(event)
-Measure custom events in time flow execution.
+This method help you trace javascript performance and measure how long a portion of code can take
+to be executed.
+You have to pass an id(String or Object) and when you want to end the measurement, you have
+call the returned function. This will return the time elapsed and the id of the process.
 
 Example:
 
@@ -41,11 +44,26 @@ setTimeout(function() {
 Example:
 
 ```js
-var timeTrack = Timeance.measure('get_user_info');
+var timeTrack = Timeance.measure({call: 'get_user_info'});
 fetch('user/me', function() {
   ...
   timeTrack();
 });
+```
+
+Example:
+Loging the response in GA in order to have metrics.
+
+```js
+var timeTrack = Timeance.measure('each_items');
+for (var i = thousands_items.length - 1; i >= 0; i--) {
+  ...
+  if (thousands_items[i]) {
+  ...
+};
+timeTrack(function(event, time) {
+	ga('event', event, time);
+})
 ```
 
 ### event(info)
