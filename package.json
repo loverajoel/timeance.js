@@ -1,6 +1,6 @@
 {
   "name": "timeance",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Abstract library for track loadtimes.",
   "repository": {
     "type": "git",
@@ -13,6 +13,12 @@
     "build": "mkdir -p dist; cp src/timeance.js dist/timeance.js; uglifyjs -c -m -o dist/timeance.min.js -- dist/timeance.js",
     "prepublish": "npm run build"
   },
+  "keywords": [
+    "performance",
+    "measure",
+    "track",
+    "events"
+  ],
   "author": "loverajoel",
   "license": "MIT",
   "main": "dist/timeance.js"

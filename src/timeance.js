@@ -1,10 +1,10 @@
 /**
- * Timeance.js 1.1.0
+ * Timeance.js
  * https://github.com/loverajoel/timeance.js
  * MIT licensed
  */
 
-(function(root, factory){
+(function(root, factory) {
   if (typeof exports === 'object') {
     // CommonJS
     module.exports = factory;

@@ -2,13 +2,13 @@
 
 [![npm version](https://badge.fury.io/js/timeance.svg)](http://badge.fury.io/js/timeance)
 
-> Abstract library for track loadtimes < 500 bytes
+> Abstract library for track loadtimes < 600 bytes
 
 # Features
 
 - Access to `window.performance` data
 - Track custom events
-- Measure events in execution time flow
+- Measure how long a portion of code can take to be executed
 
 
 # Install
