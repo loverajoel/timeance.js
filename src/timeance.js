@@ -1,15 +1,20 @@
 /**
- * Timeance.js 1.0.0
+ * Timeance.js 1.1.0
  * https://github.com/loverajoel/timeance.js
  * MIT licensed
  */
 
 (function(root, factory){
-    if(typeof define === 'function' && define.amd){
-        define([],factory);
-    }else{
-        root.Timeance = factory;
-    }
+  if (typeof exports === 'object') {
+    // CommonJS
+    module.exports = factory;
+  } else if (typeof define === 'function' && define.amd) {
+    // AMD
+    define([],factory);
+  } else {
+    // Global Variables
+    root.Timeance = factory;
+  }
 })(this, (function(){
   var Timeance = (function(window) {
     var performance = (typeof window.performance !== 'undefined') ? window.performance : undefined;

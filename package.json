@@ -1,12 +1,12 @@
 {
   "name": "timeance",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Abstract library for track loadtimes.",
   "repository": {
     "type": "git",
     "url": "https://github.com/loverajoel/timeance.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "uglifyjs": "2.4.10"
   },
   "scripts": {

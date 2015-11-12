@@ -26,8 +26,9 @@ Timeance provide a easy API.
 ### measure(event)
 This method help you trace javascript performance and measure how long a portion of code can take
 to be executed.
-You have to pass an id(String or Object) and when you want to end the measurement, you have
-call the returned function. This will return the time elapsed and the id of the process.
+You give each timer a id(String or Object) and when you want to end the measurement, you have
+call the returned function, the method will output the time, in milliseconds, that elapsed since 
+the timer was started.
 
 Example:
 
@@ -52,13 +53,12 @@ fetch('user/me', function() {
 ```
 
 Example:
+
 Loging the response in GA in order to have metrics.
 
 ```js
 var timeTrack = Timeance.measure('each_items');
 for (var i = thousands_items.length - 1; i >= 0; i--) {
-  ...
-  if (thousands_items[i]) {
   ...
 };
 timeTrack(function(event, time) {
@@ -67,7 +67,7 @@ timeTrack(function(event, time) {
 ```
 
 ### event(info)
-Track a simple event in your execution flow. This will be return with final data.
+This method records a point during execution and return
 ```js
 Timeance.event('lister-two');
 Timeance.event({id: 'lister-two'});
