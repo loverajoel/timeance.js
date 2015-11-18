@@ -54,7 +54,7 @@ fetch('user/me', function() {
 
 Example:
 
-Loging the response in GA in order to have metrics.
+Loging the response in GA in order to storage metrics.
 
 ```js
 var timeTrack = Timeance.measure('each_items');

@@ -21,5 +21,5 @@
   ],
   "author": "loverajoel",
   "license": "MIT",
-  "main": "dist/timeance.js"
+  "main": "dist/timeance.min.js"
 }
