@@ -1,0 +1,24 @@
+{
+  "name": "timeance",
+  "description": "Abstract library for track loadtimes.",
+  "main": "dist/timeance.min.js",
+  "authors": [
+    "loverajoel"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "performance",
+    "measure",
+    "track",
+    "events"
+  ],
+  "homepage": "https://github.com/loverajoel/timeance.js",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
